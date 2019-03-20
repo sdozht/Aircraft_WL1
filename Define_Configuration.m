@@ -29,6 +29,7 @@ Inertia_G_B = diag([Ixp;Iyp;Izp]);
 
 Configuration               = struct;
 Configuration.Mass          = WTO;
+Configuration.Mass_empty    = 0.8*WTO;
 Configuration.Inertia_G_B   = Inertia_G_B;
 Configuration.c             = c_bar_ref;
 Configuration.b             = b;
