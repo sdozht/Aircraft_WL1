@@ -14,17 +14,30 @@ POS_CG      = [POS_CGRef(1)+0*c_bar_ref,0,0]';
 
 
 %% 转动惯量估算
-phixp = 0.2*2/3;
-phiyp = 0.2/3;
-phizp = phiyp;
+% method 1
+% phixp = 0.2*2/3;
+% phiyp = 0.2/3;
+% phizp = phiyp;
+% WTO = 800;
+% b = 12;
+% lf = 7.8329; %2.6273*12/4.025
+% %气动组给的数据不对，他们量的翼展是4.025m，但老师给的文档中翼展是12m，因此对他们量得的数据乘上12/4.025
+% 
+% 
+% Ixp = WTO*b^2*phixp/12;
+% Iyp = WTO*lf^2*phiyp/12;
+% Izp = WTO*(b^2+lf^2)*phizp/12;
+% Inertia_G_B = diag([Ixp;Iyp;Izp]);
+
+% method 2 (貌似更合理一点)
 WTO = 800;
 b = 12;
-lf = 12;
+lf = 7.8329;
+Hmf = 1.0435; %0.35*12/4.025    
 
-
-Ixp = WTO*b^2*phixp/12;
-Iyp = WTO*lf^2*phiyp/12;
-Izp = WTO*(b^2+lf^2)*phizp/12;
+Ixp = WTO*(b^2/78+Hmf^2/33);
+Iyp = WTO*(lf^2/29+Hmf^2/33);
+Izp = WTO*(lf^2/29+b^2/78);
 Inertia_G_B = diag([Ixp;Iyp;Izp]);
 
 Configuration               = struct;
