@@ -24,6 +24,8 @@ Actuators.Pseudo.DEDef_Max      = 30*pi/180;
 Actuators.Pseudo.DADef_Max      = 30*pi/180;
 Actuators.Pseudo.DRDef_Max      = 30*pi/180;
 Actuators.Pseudo.FWDef_Max      = 20*pi/180;
+Actuators.Pseudo.CAweight_De    = 0.5;
+Actuators.Pseudo.CAweight_Dr    = 0.5;
 
 end
 

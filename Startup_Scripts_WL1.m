@@ -9,3 +9,6 @@ for Act_File = 1 : length(Files_in_Folder)
         load([Interface_Folder,'/',Files_in_Folder(Act_File).name]);   
     end
 end
+
+%%
+load Trimpoint2 Linmod2
