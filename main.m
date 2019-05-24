@@ -5,14 +5,14 @@ Actuators       = Define_Actuators;
 AeroDerivatives = Define_AeroDerivatives;
 Gear            = Define_Gear;
 
-
-
+%%
+load Trimpoint3
 %%
 TP_uvwb = opreport.States(4).x;
 TP_Euler = opreport.States(1).x;
 
 Sim_Control = struct;
-Sim_Control.init = [0,0,1000;... %Xe Ye Ze
+Sim_Control.init = [0,0,-1000;... %Xe Ye Ze
                     TP_uvwb(1),0,TP_uvwb(3);... %ub vb wb 
                     0,TP_Euler(2),0;... %roll pitch yaw
                     0,0,0]; %p q r
@@ -40,19 +40,18 @@ Lim.Max_Steerc_rc       = 60*pi/180;
 
 
 %%
-VAR_Airport_On = 0;
-Sim_Elevation = 40;
-
-%%
 run('Aircraft_WL1');
 
 
 %% 从地面起飞
-dh = Gear.NoseStrut.POS_R_GearStrut_B(3);
-Sim_Control = struct;
-Sim_Control.init = [0,0,-(Sim_Elevation+dh);... %Xe Ye Ze
-                    0,0,0;... %ub vb wb 
-                    0,0,0;... %roll pitch yaw
-                    0,0,0]; %p q r
-                
+% VAR_Airport_On = 0;
+% Sim_Elevation = 40;
+% 
+% dh = Gear.NoseStrut.POS_R_GearStrut_B(3);
+% Sim_Control = struct;
+% Sim_Control.init = [0,0,-(Sim_Elevation+dh);... %Xe Ye Ze
+%                     0,0,0;... %ub vb wb 
+%                     0,0,0;... %roll pitch yaw
+%                     0,0,0]; %p q r
+%                 
 
