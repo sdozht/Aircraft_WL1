@@ -1,55 +1,27 @@
-function Configuration = Define_Configuration
-lamda       = 12;
-S           = 12;
-b           = 12;
-ratio_c1c0  = 0.45;
-c0          = 2*b/lamda/(1+ratio_c1c0);
-c1          = ratio_c1c0*c0;
-c_bar_ref   = 1.048; %由b0,b1图解法获得
-POS_AC      = [4.335,0,0]'; %距离机头
-ks          = 0.15;
-POS_CGRef   = [ks*c_bar_ref+POS_AC(1),0,0]';
-POS_CG      = [POS_CGRef(1)+0*c_bar_ref,0,0]';
-
-
-
-%% 转动惯量估算
-% method 1
-% phixp = 0.2*2/3;
-% phiyp = 0.2/3;
-% phizp = phiyp;
-% WTO = 800;
-% b = 12;
-% lf = 7.8329; %2.6273*12/4.025
-% %气动组给的数据不对，他们量的翼展是4.025m，但老师给的文档中翼展是12m，因此对他们量得的数据乘上12/4.025
-% 
-% 
-% Ixp = WTO*b^2*phixp/12;
-% Iyp = WTO*lf^2*phiyp/12;
-% Izp = WTO*(b^2+lf^2)*phizp/12;
-% Inertia_G_B = diag([Ixp;Iyp;Izp]);
-
-% method 2 (貌似更合理一点)
-WTO = 800;
-b = 12;
-lf = 7.8329;
-Hmf = 1.0435; %0.35*12/4.025    
-
-Ixp = WTO*(b^2/78+Hmf^2/33);
-Iyp = WTO*(lf^2/29+Hmf^2/33);
-Izp = WTO*(lf^2/29+b^2/78);
-Inertia_G_B = diag([Ixp;Iyp;Izp]);
-
+function Configuration = Define_Configuration 
+%%源于气动组提供数据,具体见tornadoResult.docx
 Configuration               = struct;
-Configuration.Mass          = WTO;
-Configuration.Mass_empty    = 0.8*WTO;
-Configuration.Inertia_G_B   = Inertia_G_B;
-Configuration.c             = c_bar_ref;
-Configuration.b             = b;
-Configuration.S             = S;
-Configuration.POS_CGRef     = POS_CGRef;
-Configuration.POS_CG        = POS_CG;
-Configuration.POS_AC        = POS_AC;
+Configuration.Mass          = 800;
+Configuration.Mass_Constr   = 0.7*800;%假设燃油重量占起飞重量的30%
+Configuration.Mass_Fuel     = 0.3*800;%假设燃油重量占起飞重量的30%
+Configuration.Inertia_G_B   = [1503.3,0,0;...
+                               0,1718.9,0;...
+                               0,0,3169.5]; %根据飞机设计手册中公式估算得到，具体见Define_Configuration001.m和Origindata_of_Modeling.docx
+Configuration.c             = 1.0746;
+Configuration.b             = 12;
+Configuration.S             = 12.4387;
+Configuration.ks            = 0.15; %设计静稳定裕度为15%
+Configuration.POS_AC        = [4.2205,0,0]'; %距离机头
+Configuration.POS_CGRef     = [-Configuration.ks*Configuration.c+Configuration.POS_AC(1),0,0]';
+Configuration.POS_R2G       = [0*Configuration.c,0,0]';
+Configuration.POS_CG        = Configuration.POS_CGRef+Configuration.POS_R2G;%为后期调整重心留出接口
+
+c0                          = 1.3793;
+c1                          = 0.6207;
+b                           = Configuration.b;
+Configuration.POS_Fuel      = [3.4903+1.3793-0.5*(2*c1+c0)*b/2/3/(c0+c1),0,0]'; %机翼前端点位置+翼根弦长-梯形机翼几何重心位置的一半
+Configuration.POS_Constr    =...
+    Configuration.POS_CG-(Configuration.POS_Fuel-Configuration.POS_CG)*0.7;%xcg-(xfuel-xcg)*mfuel/mcons
 end
 
 
