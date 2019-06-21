@@ -11,4 +11,5 @@ for Act_File = 1 : length(Files_in_Folder)
 end
 
 %%
-load Trimpoint2 Linmod2
+load Trimpoint6
+load Linmod6

@@ -6,7 +6,7 @@ AeroDerivatives = Define_AeroDerivatives;
 Gear            = Define_Gear;
 
 %%
-load Trimpoint3
+% load Trimpoint5flag2
 %%
 TP_uvwb = opreport.States(4).x;
 TP_Euler = opreport.States(1).x;
@@ -21,6 +21,10 @@ Sim_trimInput = [opreport.Inputs(1).u...%Xi
                 ,opreport.Inputs(2).u...%Eta
                 ,opreport.Inputs(3).u...%Throttle
                 ,opreport.Inputs(4).u];%Zeta
+% Sim_trimInput = [0 ...%Xi
+%                 ,0 ...%Eta
+%                 ,0 ...%Throttle
+%                 ,0];%Zeta
 
                 
 Ts = 0.01;
@@ -54,4 +58,7 @@ run('Aircraft_WL1');
 %                     0,0,0;... %roll pitch yaw
 %                     0,0,0]; %p q r
 %                 
-
+%%
+% sys=tf([tauw_r 0],[tauw_r 1]);
+% dsys=c2d(sys,0.01,'tustin'); % 传函离散 
+% [Wnum,Wden]=tfdata(dsys,'v'); % 离散后提取分子分母

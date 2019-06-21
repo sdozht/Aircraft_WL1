@@ -59,6 +59,9 @@ AeroDerivatives.CnDf        =2.6444e-14;
 AeroDerivatives.CnDr        =-0.10037;
 AeroDerivatives.CnDa        =0.0089298;
 
+AeroDerivatives.Clp        =-0.5935;
+AeroDerivatives.Cmq        =-17.8879;
+AeroDerivatives.Cnr        =-0.044268;
 
 
 %% 更新升力系数随迎角和侧滑角变化的数据

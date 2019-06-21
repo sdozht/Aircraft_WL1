@@ -78,4 +78,4 @@ Linmod.Lat_6.D = zeros(6,2);
 
 %%
 datapath = [Root_Folder,'/Trim&Linearization/ResultData'];
-save([datapath,'/Linmod5flag3'],'Linmod');
+save([datapath,'/Linmod7'],'Linmod');

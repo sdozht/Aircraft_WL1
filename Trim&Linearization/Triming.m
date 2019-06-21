@@ -23,16 +23,16 @@ Configuration.Mass = 800;
 %                     0,0,0]; %p q r
                 
 % 巡航工况1
-% Tr_flag = 2;
-% Tr_alpha = 4*pi/180;
-% Tr_V=50;
-% Tr_Gamma = 0;
-% Tr_flap = 0;
-% Sim_Control = struct;
-% Sim_Control.init = [0,0,2000;... %Xe Ye Ze
-%                     Tr_V*cos(Tr_alpha),0,Tr_V*sin(Tr_alpha);... %ub vb wb 
-%                     0,Tr_alpha-Tr_Gamma,0;... %roll pitch yaw
-%                     0,0,0]; %p q r
+Tr_flag = 2;
+Tr_alpha = 4*pi/180;
+Tr_V=50;
+Tr_Gamma = 0;
+Tr_flap = 0;
+Sim_Control = struct;
+Sim_Control.init = [0,0,2000;... %Xe Ye Ze
+                    Tr_V*cos(Tr_alpha),0,Tr_V*sin(Tr_alpha);... %ub vb wb 
+                    0,Tr_alpha-Tr_Gamma,0;... %roll pitch yaw
+                    0,0,0]; %p q r
 
 
 % 巡航工况2
@@ -49,17 +49,17 @@ Configuration.Mass = 800;
 %                     0,0,0]; %p q r        
 
 % % 下滑工况
-Tr_flag = 4;
-Tr_alpha = 6*pi/180;
-Tr_V=20;
-Tr_Gamma = 1*pi/180;
-Tr_flap = 30/(Actuators.DFR.Def_Max*180/pi);
-Configuration.Mass = 800*0.7+1;
-Sim_Control = struct;
-Sim_Control.init = [0,0,500;... %Xe Ye Ze
-                    Tr_V*cos(Tr_alpha),0,Tr_V*sin(Tr_alpha);... %ub vb wb 
-                    0,Tr_alpha-Tr_Gamma,0;... %roll pitch yaw
-                    0,0,0]; %p q r        
+% Tr_flag = 4;
+% Tr_alpha = 6*pi/180;
+% Tr_V=20;
+% Tr_Gamma = 1*pi/180;
+% Tr_flap = 30/(Actuators.DFR.Def_Max*180/pi);
+% Configuration.Mass = 800*0.7+1;
+% Sim_Control = struct;
+% Sim_Control.init = [0,0,500;... %Xe Ye Ze
+%                     Tr_V*cos(Tr_alpha),0,Tr_V*sin(Tr_alpha);... %ub vb wb 
+%                     0,Tr_alpha-Tr_Gamma,0;... %roll pitch yaw
+%                     0,0,0]; %p q r        
 
 % Trim_Model([],[],[],'term');
 %% Specify the model name
@@ -170,10 +170,10 @@ if Tr_flag == 1||Tr_flag == 4
 end
 % Output (13) - Trim_Model/Alpha_A_R_B
 % - Default model initial conditions are used to initialize optimization.
-if Tr_flag == 2||Tr_flag == 3
-    opspec.Outputs(13).y = Tr_alpha;
-    opspec.Outputs(13).Known = true;
-end
+% if Tr_flag == 2||Tr_flag == 3
+%     opspec.Outputs(13).y = Tr_alpha;
+%     opspec.Outputs(13).Known = true;
+% end
 % Output (14) - Trim_Model/Beta_A_R_B
 % - Default model initial conditions are used to initialize optimization.
 opspec.Outputs(14).y = 0;
@@ -187,5 +187,5 @@ opt = findopOptions('DisplayReport','iter');
 
 %% save data
 datapath = [Root_Folder,'/Trim&Linearization/ResultData'];
-save([datapath,'/Trimpoint5flag4'],'opreport','Tr_V','Tr_alpha','Tr_Gamma','Tr_flap','Tr_flag');
+save([datapath,'/Trimpoint7'],'opreport','Tr_V','Tr_alpha','Tr_Gamma','Tr_flap','Tr_flag');
 
