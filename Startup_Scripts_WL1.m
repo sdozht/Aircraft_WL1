@@ -13,3 +13,4 @@ end
 %%
 load Trimpoint6
 load Linmod6
+load('Configurations_WL1.mat')

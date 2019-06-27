@@ -5,33 +5,16 @@ Actuators       = Define_Actuators;
 AeroDerivatives = Define_AeroDerivatives;
 Gear            = Define_Gear;
 
+Ts              = 0.01;
 %%
 % load Trimpoint5flag2
 %%
-TP_uvwb = opreport.States(4).x;
-TP_Euler = opreport.States(1).x;
-
+Sim_Elevation = 40;
 Sim_Control = struct;
-Sim_Control.init = [0,0,-1000;... %Xe Ye Ze
-                    TP_uvwb(1),0,TP_uvwb(3);... %ub vb wb 
-                    0,TP_Euler(2),0;... %roll pitch yaw
+Sim_Control.init = [0,0,-2000;... %Xe Ye Ze
+                    50,0,0;... %ub vb wb 
+                    0,0,0;... %roll pitch yaw
                     0,0,0]; %p q r
-                
-Sim_trimInput = [opreport.Inputs(1).u...%Xi
-                ,opreport.Inputs(2).u...%Eta
-                ,opreport.Inputs(3).u...%Throttle
-                ,opreport.Inputs(4).u];%Zeta
-% Sim_trimInput = [0 ...%Xi
-%                 ,0 ...%Eta
-%                 ,0 ...%Throttle
-%                 ,0];%Zeta
-
-                
-Ts = 0.01;
-
-% 0.5*1.225*s_V^2*12*6*s_alpha*pi/180/g
-
-
 
 
 %%
@@ -46,6 +29,25 @@ Lim.Max_Steerc_rc       = 60*pi/180;
 %%
 run('Aircraft_WL1');
 
+
+%% 从空中某点起飞
+% TP_uvwb = opreport.States(4).x;
+% TP_Euler = opreport.States(1).x;
+% 
+% Sim_Control = struct;
+% Sim_Control.init = [0,0,-1000;... %Xe Ye Ze
+%                     TP_uvwb(1),0,TP_uvwb(3);... %ub vb wb 
+%                     0,TP_Euler(2),0;... %roll pitch yaw
+%                     0,0,0]; %p q r
+%                 
+% Sim_trimInput = [opreport.Inputs(1).u...%Xi
+%                 ,opreport.Inputs(2).u...%Eta
+%                 ,opreport.Inputs(3).u...%Throttle
+%                 ,opreport.Inputs(4).u];%Zeta
+% Sim_trimInput = [0 ...%Xi
+%                 ,0 ...%Eta
+%                 ,0 ...%Throttle
+%                 ,0];%Zeta
 
 %% 从地面起飞
 % VAR_Airport_On = 0;

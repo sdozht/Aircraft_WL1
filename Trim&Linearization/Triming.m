@@ -24,14 +24,14 @@ Configuration.Mass = 800;
                 
 % Ñ²º½¹¤¿ö1
 Tr_flag = 2;
-Tr_alpha = 4*pi/180;
+Tr_alpha = 2.8*pi/180;
 Tr_V=50;
 Tr_Gamma = 0;
 Tr_flap = 0;
 Sim_Control = struct;
-Sim_Control.init = [0,0,2000;... %Xe Ye Ze
+Sim_Control.init = [0,0,-2000;... %Xe Ye Ze
                     Tr_V*cos(Tr_alpha),0,Tr_V*sin(Tr_alpha);... %ub vb wb 
-                    0,Tr_alpha-Tr_Gamma,0;... %roll pitch yaw
+                    0,Tr_alpha+Tr_Gamma,0;... %roll pitch yaw
                     0,0,0]; %p q r
 
 
@@ -73,7 +73,7 @@ opspec = operspec(model);
 %   Min = -Inf, Max = Inf, dxMin = -Inf, and dxMax = Inf.
 
 % State (1) - Trim_Model/Flight_physics|Flight_Physics_forTrim/Subsystem/6DOF (Euler Angles)/Calculate DCM & Euler Angles/phi theta psi
-opspec.States(1).x = [0;Tr_alpha-Tr_Gamma;0];
+opspec.States(1).x = [0;Tr_alpha+Tr_Gamma;0];
 
 % State (2) - Trim_Model/Flight_physics|Flight_Physics_forTrim/Subsystem/6DOF (Euler Angles)/Determine Force,  Mass & Inertia/mass
 % - Default model initial conditions are used to initialize optimization.
@@ -156,8 +156,8 @@ end
 % Output (10) - Trim_Model/VEL_K_R_ABS
 % - Default model initial conditions are used to initialize optimization.
 % if Tr_flag == 1||Tr_flag == 4
-%     opspec.Outputs(10).y = Tr_V;
-%     opspec.Outputs(10).Known = true;
+    opspec.Outputs(10).y = Tr_V;
+    opspec.Outputs(10).Known = true;
 % end
 % Output (11) - Trim_Model/Chi_K_R_B
 % - Default model initial conditions are used to initialize optimization.
