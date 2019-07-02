@@ -1,3 +1,4 @@
+%%
 %% When model include reference models don't use "block by block analytic"linearization algorythm.choose "numerical perturbation" instead.
 opt = linearizeOptions('LinearizationAlgorithm','numericalpert',...
     'SampleTime',0);

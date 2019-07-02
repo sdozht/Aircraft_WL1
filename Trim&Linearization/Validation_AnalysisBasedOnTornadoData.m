@@ -2,15 +2,16 @@ Cf              = Define_Configuration;
 AD              = Define_AeroDerivatives;
 Engine          = Define_Engine;
 %% 纵向小扰动方程矩阵形式
-g = Cf.g;
-rho = Cf.rho;
+g = 9.80665;
+rho = 1.11;
 m = Cf.Mass;
 Iyy = Cf.Inertia_G_B(2,2);
 
-
-V0 = Cf.V0;
-alpha0 = Cf.alpha0;
-CD0 = Cf.CD0*15; %与常见飞机的CD0相差一个量级，考虑到Tornado对阻力的计算本身就不准确，所以此处放大15倍
+V0 = 50;
+alpha0 = 0.0489;
+CD0 = 0.0024505*15; 
+%与常见飞机的CD0相差一个量级，考虑到Tornado对阻力的计算本身就不准确，
+%所以此处放大15倍,放大后飞机升阻比近似达到15,这较为合理
 
 qS = 0.5*rho*V0^2*Cf.S;
 T0 = CD0*qS/cos(alpha0);
@@ -32,7 +33,7 @@ DD.MV = 0; %CmV为0
 DD.Malpha = AD.CmAlpha*qS*Cf.c/Iyy;
 DD.Mq = AD.Cmq*qS*Cf.c^2/Iyy/2/V0;
 DD.XDe = -AD.CDDe*qS/m;
-DD.XDp = TDp*cos(alpha0)/m;
+DD.XDp = DD.TDp*cos(alpha0)/m;
 DD.ZDe = AD.CLDe*qS/m/V0;
 DD.ZDp = DD.TDp*sin(alpha0)/m/V0;
 DD.MDe = AD.CmDe*qS*Cf.c/Iyy;
