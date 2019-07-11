@@ -2,9 +2,10 @@
 %% When model include reference models don't use "block by block analytic"linearization algorythm.choose "numerical perturbation" instead.
 opt = linearizeOptions('LinearizationAlgorithm','numericalpert',...
     'SampleTime',0);
-model = "Trim_Model2";
+% model = "Trim_Model2";
+model = "Trim_Model_ForStudent";
 
-sys = linearize(model,opreport,opt);
+sys = linearize(model,op_trim2,opt);
 
 %states order: phi theta psi ub vb wb p  q  r xe ye ze 
 %             [1   2     3   4  5  6  7  8  9 10 11 12]
