@@ -10,6 +10,7 @@
 %%
 Tr_V = 50;
 Tr_ze = -2000;
+Tr_flap = 0;
 
 %% Specify the model name
 model = 'Trim_Model_ForStudent';
