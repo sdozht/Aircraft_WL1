@@ -64,3 +64,6 @@ run('Aircraft_WL1');
 % sys=tf([tauw_r 0],[tauw_r 1]);
 % dsys=c2d(sys,0.01,'tustin'); % 传函离散 
 % [Wnum,Wden]=tfdata(dsys,'v'); % 离散后提取分子分母
+
+%%
+% save('Configurations_WL1','cs')

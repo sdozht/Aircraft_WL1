@@ -192,5 +192,5 @@ Linmod.Lat_5b.D = Linmod.Lat_5a.D;
 %%
 Linmod
 %%
-% datapath = [Root_Folder,'/Trim&Linearization/ResultData'];
-% save([datapath,'/Linmod7'],'Linmod');
+datapath = [Root_Folder,'/Trim&Linearization/ResultData'];
+save([datapath,'/Linmod001'],'Linmod');
