@@ -11,6 +11,6 @@ for Act_File = 1 : length(Files_in_Folder)
 end
 
 %%
-load Trimpoint7
-load Linmod7
+load Trimpoint001
+load Linmod001
 load('Configurations_WL1.mat')

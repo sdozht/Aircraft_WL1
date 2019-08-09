@@ -42,6 +42,7 @@ D = D*TM_Inputunit;
 
 %% customize system matrixes
 %% all states
+%all:
 %state order: delta[ub:wb:q:theta:ze:xe:p:Phi:vb:r:psi:ye]
 %input order: delta[DE:Dth:DA:DR]
 %output order:delta[q:Alpha:theta:Gamma:VEL_K_R_ABS:we:ze:ue:xe:p:phi:r:Beta:ve:ye:psi:Chi]
@@ -52,6 +53,7 @@ Linmod.all.C = C;
 Linmod.all.D = D;
 
 %% Longitudinal motion states, 6 order
+%Lon_all:
 %state order: delta[ub:wb:q:theta:ze:xe]
 %input order: delta[DE:Dth]
 %output order:delta[q:Alpha:theta:Gamma:VEL_K_R_ABS:we:ze:ue:xe]
@@ -65,9 +67,10 @@ Linmod.Lon_all.D = zeros(9,2);
 
 
 %% Longitudinal motion states, 4 order
+%Lon_4a£º
 %state order: delta[ub:wb:q:theta]
 %input order: delta[DE:Dth]
-%output order:delta[ub:wb:q:theta]
+%output order:delta[q:Alpha:theta:Gamma:VEL_K_R_ABS:we]
 
 Linmod.Lon_4a.A = Linmod.Lon_all.A(1:4,1:4);
 Linmod.Lon_4a.B = Linmod.Lon_all.B(1:4,1:2);
@@ -75,9 +78,10 @@ Linmod.Lon_4a.C = Linmod.Lon_all.C(1:6,1:4);
 Linmod.Lon_4a.D = zeros(6,2);
 
 
+%Lon_4b£º
 %state order: delta[V:alpha:q:theta]
 %input order: delta[DE:Dth]
-%output order:delta[V:alpha:q:theta]
+%output order:delta[q:Alpha:theta:Gamma:VEL_K_R_ABS:we]
 
 %delta[V:alpha:q:theta] = T1*delta[ub:wb:q:theta]
 Ltrim = struct;
@@ -99,6 +103,7 @@ Linmod.Lon_4b.D = Linmod.Lon_4a.D;
 
 
 %% Longitudinal motion states, 5 order
+%Lon_5a£º
 %state order: delta[ub:wb:q:theta:ze]
 %input order: delta[DE:Dth]
 %output order:delta[ub:wb:q:theta:ze]
@@ -108,6 +113,8 @@ Linmod.Lon_5a.B = B(1:5,1:2);
 Linmod.Lon_5a.C = eye(5);
 Linmod.Lon_5a.D = zeros(5,2);
 
+
+%Lon_5b£º
 %state order: delta[[V:alpha:q:theta:ze]
 %input order: delta[DE:Dth]
 %output order:delta[[V:alpha:q:theta:ze]
@@ -125,6 +132,7 @@ Linmod.Lon_5b.C = Linmod.Lon_5a.C/T1;
 Linmod.Lon_5b.D = Linmod.Lon_5a.D;
 
 %% lateral-directional motion states, 6 order
+%Lat_all£º
 %state order: delta[p:phi:vb:r:psi:ye]
 %input order: delta[DA:DR]
 %output order:delta[p:phi:r:Beta:ve:ye:psi:Chi]
@@ -136,6 +144,7 @@ Linmod.Lat_all.C = C(10:17,7:12);
 Linmod.Lat_all.D = zeros(8,2);
 
 %% lateral-directional motion states, 4 order
+%Lat_4a:
 %state order: delta[p:phi:vb:r]
 %input order: delta[DA:DR]
 %output order:delta[p:phi:vb:r]
@@ -146,6 +155,8 @@ Linmod.Lat_4a.C = eye(4);
 Linmod.Lat_4a.D = zeros(4,2);
 
 
+
+%Lat_4b:
 %state order: delta[beta:p:r:phi]
 %input order: delta[DA:DR]
 %output order:delta[beta:p:r:phi]
@@ -164,6 +175,7 @@ Linmod.Lat_4b.D = Linmod.Lat_4a.D;
 
 
 %% lateral-directional motion states, 5 order
+%Lat_5a:
 %state order: delta[p:phi:vb:r:psi]
 %input order: delta[DA:DR]
 %output order:delta[p:phi:r:Beta:ve:psi]
@@ -174,6 +186,7 @@ Linmod.Lat_5a.C = Linmod.Lat_all.C([1:5,7],1:5);
 Linmod.Lat_5a.D = zeros(6,2);
 
 
+%Lat_5b:
 %state order: delta[beta:p:r:phi:psi]
 %input order: delta[DA:DR]
 %output order:delta[p:phi:r:Beta:ve:psi]

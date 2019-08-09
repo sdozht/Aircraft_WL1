@@ -75,6 +75,8 @@ Ixx = Cf.Inertia_G_B(1,1);
 Izz = Cf.Inertia_G_B(3,3);
 Ixz = Cf.Inertia_G_B(1,3);
 
+Cf.V0 = V0;
+
 DD.LBeta = AD.ClBeta*qS*Cf.b;
 DD.Lp = AD.Clp*qS*Cf.b*Cf.b/2/Cf.V0;
 DD.Lr = AD.Clr*qS*Cf.b*Cf.b/2/Cf.V0;
@@ -138,5 +140,9 @@ grid on
 figure(3)
 nichols(-Gtmp(4,1))
 grid on
+
+%% KARI
+KARI = -(DD.NDa_-DD.LDa_*tan(alpha0))/(DD.NDr_-DD.LDr_*tan(alpha0))
+
 
 
