@@ -3,7 +3,6 @@ Configuration   = Define_Configuration;
 Engine          = Define_Engine;
 Actuators       = Define_Actuators;
 AeroDerivatives = Define_AeroDerivatives;
-Gear            = Define_Gear;
 
 Ts              = 0.01;
 %%

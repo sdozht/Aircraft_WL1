@@ -1,4 +1,4 @@
-load('Trimpoint7.mat')
+load('Trimpoint001.mat')
 %%
 Tr_flap = 0;
 
